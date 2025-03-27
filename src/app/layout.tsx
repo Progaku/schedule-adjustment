@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ColorModeScript, UIProvider } from "@yamada-ui/react";
+import { UIProvider } from "@yamada-ui/react";
+import { colorModeManager } from "@/lib/colorModeManager";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ColorModeScript />
-        <UIProvider>
+        <UIProvider colorModeManager={colorModeManager}>
           {children}
         </UIProvider>
       </body>

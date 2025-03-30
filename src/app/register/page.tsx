@@ -1,3 +1,5 @@
+import AttendanceNewForm from './AttendanceNewForm';
+
 export default function NewAttendance() {
-  return <div>NewAttendance</div>;
+  return <AttendanceNewForm />;
 }

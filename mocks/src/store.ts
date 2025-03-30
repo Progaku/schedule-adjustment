@@ -5,6 +5,7 @@ interface State {
     title: string;
     description: string;
     schedules: {
+      id: string;
       name: string;
       params: {
         date: string;

@@ -1,8 +1,8 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import { store } from './store';
 import { HTTPException } from 'hono/http-exception';
+import participantRouter from './apis/participant.api';
 import { response500 } from './apis/response';
 
 const app = new Hono();
@@ -21,7 +21,8 @@ app.onError((err, c) => {
   console.error(err);
   return response500(c);
 });
-app.route('/api', API);
+
+app.route('/api', participantRouter);
 
 serve(
   {

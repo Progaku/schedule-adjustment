@@ -5,6 +5,7 @@ import { Response400Error, Response404Error } from './errors';
 import { response200, response200noContent } from './response';
 import { RegisterAttendanceRequestValidate } from './serializers/build/register-attendance.interface';
 import { RegisterParticipantRequestValidate } from './serializers/build/register-participant.interface';
+import { UpdateAttendanceRequestValidate } from './serializers/build/update-attendance.interface';
 
 const router = new Hono();
 
@@ -33,6 +34,25 @@ router.get('/:uuid', (c) => {
   }
   return response200(c, store[uuid]);
 });
+
+router.patch(
+  '/:uuid',
+  typiaValidator('json', UpdateAttendanceRequestValidate, (result) => {
+    if (!result.success) {
+      throw new Response400Error();
+    }
+  }),
+  (c) => {
+    const uuid = c.req.param('uuid');
+    if (!(uuid in store)) {
+      throw new Response404Error();
+    }
+    const res = c.req.valid('json');
+    store[uuid].title = res.title;
+    store[uuid].description = res.description;
+    return response200noContent(c);
+  },
+);
 
 router.post(
   '/:uuid',

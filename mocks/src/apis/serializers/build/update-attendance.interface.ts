@@ -1,0 +1,54 @@
+import * as __typia_transform__validateReport from "typia/lib/internal/_validateReport.js";
+import typia, { tags } from 'typia';
+export interface UpdateAttendanceRequest {
+    title: string & tags.MinLength<1> & tags.MaxLength<128>;
+    description: string & tags.MaxLength<1000>;
+}
+export const UpdateAttendanceRequestValidate = (() => { const _io0 = (input: any): boolean => "string" === typeof input.title && (1 <= input.title.length && input.title.length <= 128) && ("string" === typeof input.description && input.description.length <= 1000); const _vo0 = (input: any, _path: string, _exceptionable: boolean = true): boolean => ["string" === typeof input.title && (1 <= input.title.length || _report(_exceptionable, {
+        path: _path + ".title",
+        expected: "string & MinLength<1>",
+        value: input.title
+    })) && (input.title.length <= 128 || _report(_exceptionable, {
+        path: _path + ".title",
+        expected: "string & MaxLength<128>",
+        value: input.title
+    })) || _report(_exceptionable, {
+        path: _path + ".title",
+        expected: "(string & MinLength<1> & MaxLength<128>)",
+        value: input.title
+    }), "string" === typeof input.description && (input.description.length <= 1000 || _report(_exceptionable, {
+        path: _path + ".description",
+        expected: "string & MaxLength<1000>",
+        value: input.description
+    })) || _report(_exceptionable, {
+        path: _path + ".description",
+        expected: "(string & MaxLength<1000>)",
+        value: input.description
+    })].every((flag: boolean) => flag); const __is = (input: any): input is UpdateAttendanceRequest => "object" === typeof input && null !== input && _io0(input); let errors: any; let _report: any; return (input: any): import("typia").IValidation<UpdateAttendanceRequest> => {
+    if (false === __is(input)) {
+        errors = [];
+        _report = (__typia_transform__validateReport._validateReport as any)(errors);
+        ((input: any, _path: string, _exceptionable: boolean = true) => ("object" === typeof input && null !== input || _report(true, {
+            path: _path + "",
+            expected: "UpdateAttendanceRequest",
+            value: input
+        })) && _vo0(input, _path + "", true) || _report(true, {
+            path: _path + "",
+            expected: "UpdateAttendanceRequest",
+            value: input
+        }))(input, "$input", true);
+        const success = 0 === errors.length;
+        return success ? {
+            success,
+            data: input
+        } : {
+            success,
+            errors,
+            data: input
+        } as any;
+    }
+    return {
+        success: true,
+        data: input
+    } as any;
+}; })();

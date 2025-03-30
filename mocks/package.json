@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.14.0",
+    "@hono/typia-validator": "^0.1.2",
     "hono": "^4.7.5",
     "typia": "^8.1.0"
   },

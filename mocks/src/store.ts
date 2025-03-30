@@ -4,6 +4,7 @@ interface State {
   [k: string]: {
     title: string;
     description: string;
+    candidateDate: string[];
     schedules: {
       id: string;
       name: string;

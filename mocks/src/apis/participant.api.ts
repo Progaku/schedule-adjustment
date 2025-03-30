@@ -25,10 +25,10 @@ router.patch(
       throw new Response404Error();
     }
     const res = c.req.valid('json');
-    store[uuid].schedules.with(targetIndex, {
+    store[uuid].schedules[targetIndex] = {
       id: participant,
       ...res,
-    });
+    };
     return response200noContent(c);
   },
 );

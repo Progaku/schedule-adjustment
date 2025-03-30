@@ -2,6 +2,8 @@ import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { store } from './store';
+import { HTTPException } from 'hono/http-exception';
+import { response500 } from './apis/response';
 
 const app = new Hono();
 app.use(
@@ -12,14 +14,12 @@ app.use(
   }),
 );
 
-app.notFound((c) => {
-  return c.text('not found page', 404);
-});
-
-const API = new Hono();
-
-API.get('/', (c) => {
-  return c.json(store);
+app.onError((err, c) => {
+  if (err instanceof HTTPException) {
+    return err.getResponse();
+  }
+  console.error(err);
+  return response500(c);
 });
 app.route('/api', API);
 

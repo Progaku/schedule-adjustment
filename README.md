@@ -35,6 +35,19 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## API
+
+### RUN
+
+```sh
+npm run mock
+```
+
+### Build typia
+
+```sh
+npm run typia-build
+```
 
 ## Biome
 

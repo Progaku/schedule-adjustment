@@ -4,6 +4,7 @@
     "description": "プロジェクトの進捗会議について",
     "schedules": [
       {
+        "id": "fdfee219-e396-493f-8041-66fc4b09a4ce",
         "name": "田中太郎",
         "params": [
           { "date": "2025-03-30T00:00:00.000Z", "status": "ng" },
@@ -14,6 +15,7 @@
         ]
       },
       {
+        "id": "2ba5e514-b63f-4e0e-9b9b-68d96ae29c94",
         "name": "山田一郎",
         "params": [
           { "date": "2025-03-30T00:00:00.000Z", "status": "pn" },
@@ -30,6 +32,7 @@
     "description": "",
     "schedules": [
       {
+        "id": "556ea703-0bdd-4935-a692-91ff643580d1",
         "name": "曙",
         "params": [
           { "date": "2025-04-05T00:00:00.000Z", "status": "ng" },
@@ -39,6 +42,7 @@
         ]
       },
       {
+        "id": "00758bc1-36a8-4d86-888c-28f75f163efd",
         "name": "小錦",
         "params": [
           { "date": "2025-04-05T00:00:00.000Z", "status": "ok" },

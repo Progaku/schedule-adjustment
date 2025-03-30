@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "mock": "tsx watch mocks/src/index.ts",
-    "typia-build": "npx typia generate --input mocks/src/apis/serializers --output mocks/src/apis/serializers/build --project tsconfig.json"
+    "lint": "next lint"
   },
   "dependencies": {
     "@yamada-ui/calendar": "^1.8.16",
@@ -26,10 +24,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
-    "ts-patch": "^3.3.0",
-    "typescript": "~5.8.2"
-  },
-  "workspaces": [
-    "mocks"
-  ]
+    "typescript": "^5"
+  }
 }

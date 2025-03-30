@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "mock": "tsx watch mocks/src/index.ts",
+    "prepare": "ts-patch install"
   },
   "dependencies": {
     "@yamada-ui/calendar": "^1.8.16",
@@ -24,6 +26,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "ts-patch": "^3.3.0",
+    "typescript": "~5.8.2"
+  },
+  "workspaces": [
+    "mocks"
+  ]
 }

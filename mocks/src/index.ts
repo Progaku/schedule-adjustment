@@ -3,8 +3,8 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { HTTPException } from 'hono/http-exception';
 import attendanceRouter from './apis/attendance.api';
+import { response500 } from './apis/core/response';
 import participantRouter from './apis/participant.api';
-import { response500 } from './apis/response';
 import { store } from './store';
 
 const LOGGING_STORE_MATHOD = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);

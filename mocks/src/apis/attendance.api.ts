@@ -1,8 +1,8 @@
 import { typiaValidator } from '@hono/typia-validator';
 import { Hono } from 'hono';
 import { store } from '../store';
-import { Response400Error, Response404Error } from './errors';
-import { response200, response200noContent } from './response';
+import { Response400Error, Response404Error } from './core/errors';
+import { response200, response200noContent } from './core/response';
 import { RegisterAttendanceRequestValidate } from './serializers/build/register-attendance.interface';
 import { RegisterParticipantRequestValidate } from './serializers/build/register-participant.interface';
 import { UpdateAttendanceRequestValidate } from './serializers/build/update-attendance.interface';

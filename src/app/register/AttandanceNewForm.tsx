@@ -18,7 +18,7 @@ const AttandanceNewForm = () => {
       <VStack as="form" w="full" flex="1" g={12} justifyContent="space-between">
         <VStack g={12}>
           <FormControl required label="タイトル" errorMessage="タイトルは必須です。" helperMessage="128文字以内">
-            <Input placeholder="入力内容" name="title" min="1" max="128" />
+            <Input placeholder="入力内容" name="title" maxLength={128} />
           </FormControl>
 
           <FormControl label="説明">

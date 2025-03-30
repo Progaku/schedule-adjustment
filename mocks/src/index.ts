@@ -2,6 +2,7 @@ import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { HTTPException } from 'hono/http-exception';
+import attendanceRouter from './apis/attendance.api';
 import participantRouter from './apis/participant.api';
 import { response500 } from './apis/response';
 
@@ -22,6 +23,7 @@ app.onError((err, c) => {
   return response500(c);
 });
 
+app.route('/api', attendanceRouter);
 app.route('/api', participantRouter);
 
 serve(

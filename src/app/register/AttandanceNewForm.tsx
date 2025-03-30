@@ -29,7 +29,13 @@ const AttandanceNewForm = () => {
             <Text fontSize="sm" color="gray.500" mb={2}>
               今日以降で2日以上
             </Text>
-            <MultiDatePicker placeholder="YYYY/MM/DD" minDate={new Date()} locale="ja" onChange={selectedDate} />
+            <MultiDatePicker
+              placeholder="YYYY/MM/DD"
+              minDate={new Date()}
+              locale="ja"
+              onChange={selectedDate}
+              name="possibledates"
+            />
           </FormControl>
         </VStack>
 

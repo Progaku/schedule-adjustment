@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.css"],
+		"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.css", "mocks/**/*.ts"],
 		"ignore": ["**/node_modules/**"]
 	},
 	"formatter": {
@@ -34,7 +34,11 @@
 				"noVar": "error",
 				"useForOf": "off",
 				"noNonNullAssertion": "off",
-				"useImportType": "off"
+				"useImportType": "off",
+				"useTemplate": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "warn"
 			},
 			"a11y": {
 				"useButtonType": "off"

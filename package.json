@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "mock": "tsx watch mocks/src/index.ts",
-    "prepare": "ts-patch install",
     "typia-build": "npx typia generate --input mocks/src/apis/serializers --output mocks/src/apis/serializers/build --project tsconfig.json"
   },
   "dependencies": {

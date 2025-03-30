@@ -19,3 +19,13 @@ export class Response404Error extends HTTPException {
     super(404, { res: NotFoundError });
   }
 }
+
+export const ExcessOrDeficiencyDateError = new Response('Excess Or Deficiency Date', {
+  status: 400,
+});
+
+export class Response400ExcessOrDeficiencyDateError extends HTTPException {
+  constructor() {
+    super(400, { res: ExcessOrDeficiencyDateError });
+  }
+}

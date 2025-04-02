@@ -19,14 +19,14 @@ export async function fetchCandidateDates(uuid: string): Promise<Attendance> {
     if (!res.ok) {
       switch (res.status) {
         case 404:
-          throw new FetchApiError(404, `出席情報が見つかりません。UUID：:${uuid}`);
+          throw new FetchApiError(404, `予定表が見つかりません。UUID:${uuid}`);
         default:
           throw new FetchApiError(res.status, `システムエラーが発生しました。内容：${res.statusText}`);
       }
     }
     const data: Attendance = await res.json();
     if (!data) {
-      throw new FetchApiError(404, `出席情報が見つかりません。uuid：${uuid}`);
+      throw new FetchApiError(404, `予定表が見つかりません。uuid：${uuid}`);
     }
     return data;
   } catch (error) {

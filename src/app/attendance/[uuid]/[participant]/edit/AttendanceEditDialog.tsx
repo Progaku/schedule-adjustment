@@ -40,11 +40,11 @@ export default function AttendanceEditDialog({
     >
       <Stack gap={8} p={4}>
         <FormControl>
-          <Label>タイトル</Label>
+          <Label fontWeight='bold'>タイトル</Label>
           <Input value={title} onChange={(e) => setTitle(e.target.value)} />
         </FormControl>
         <FormControl>
-          <Label>説明</Label>
+          <Label fontWeight='bold'>説明</Label>
           <Textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}

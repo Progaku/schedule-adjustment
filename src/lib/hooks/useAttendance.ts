@@ -7,7 +7,7 @@ const fetcher = async (url: string): Promise<Attendance> => {
   if (!res.ok) {
     throw new Error(`HTTP status: ${res.status}`);
   }
-  const data = await res.json();
+  const data = res.json();
   return data;
 };
 

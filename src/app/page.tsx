@@ -1,33 +1,26 @@
+'use client';
 
 import Title from '@/components/top/title';
 import StartButton from '@/components/top/startButton';
+import { useDisclosure } from '@yamada-ui/react';
+import { Button } from '@yamada-ui/react';
+import AttendanceEditDialog from './attendance/[uuid]/[participant]/edit/AttendanceEditDialog';
 
 export default function Home() {
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false);
-
-  const handleEdit = () => {
-    setIsEditDialogOpen(true);
-  };
-
-  const handleSave = () => {
-    setIsEditDialogOpen(false);
-  };
+  const { open, onOpen, onClose } = useDisclosure();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="text-center">
+    <div className='flex flex-col items-center justify-center min-h-screen'>
+      <div className='text-center'>
         <Title />
         <StartButton />
       </div>
-      <Button onClick={handleEdit} background='black' textColor='white'>
+      <Button onClick={onOpen} background='black' textColor='white'>
         スケジュールを編集
       </Button>
 
-      <AttendanceEditDialog
-        isOpen={isEditDialogOpen}
-        onClose={() => setIsEditDialogOpen(false)}
-        onSave={handleSave}
-      />
+      {/* # TODO: onSaveでAPIを叩く */}
+      <AttendanceEditDialog isOpen={open} onClose={onClose} onSave={onClose} />
     </div>
   );
 }

@@ -1,8 +1,6 @@
-'use client';
 
-import { useState } from 'react';
-import { Button } from '@yamada-ui/react';
-import AttendanceEditDialog from './attendance/[uuid]/[participant]/edit/AttendanceEditDialog';
+import Title from '@/components/top/title';
+import StartButton from '@/components/top/startButton';
 
 export default function Home() {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false);
@@ -16,7 +14,11 @@ export default function Home() {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center'>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="text-center">
+        <Title />
+        <StartButton />
+      </div>
       <Button onClick={handleEdit} background='black' textColor='white'>
         スケジュールを編集
       </Button>

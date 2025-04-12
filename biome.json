@@ -28,7 +28,8 @@
 			"correctness": {
 				"noUnusedImports": "error",
 				"noUnusedVariables": "error",
-				"noUnreachable": "error"
+				"noUnreachable": "error",
+				"useExhaustiveDependencies": "info"
 			},
 			"style": {
 				"noVar": "error",

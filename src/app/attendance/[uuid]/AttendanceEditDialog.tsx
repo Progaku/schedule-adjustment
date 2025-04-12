@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Modal, Button, Input, Textarea, Stack, FormControl, Label, ErrorMessage } from '@yamada-ui/react';
+import { Button, ErrorMessage, FormControl, Input, Label, Modal, Stack, Textarea } from '@yamada-ui/react';
+import { useEffect, useState } from 'react';
 
 const MAX_DESCRIPTION_LENGTH = 1000;
 const MAX_TITLE_LENGTH = 128;
@@ -10,11 +10,24 @@ interface AttendanceEditDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: () => void;
+  title: string;
+  description: string;
 }
 
-export default function AttendanceEditDialog({ isOpen, onClose, onSave }: AttendanceEditDialogProps) {
+export default function AttendanceEditDialog({
+  isOpen,
+  onClose,
+  onSave,
+  title: _title,
+  description: _description,
+}: AttendanceEditDialogProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    setTitle(_title);
+    setDescription(_description);
+  }, [_title, _description, isOpen]);
 
   const isTitleValid = title.length <= MAX_TITLE_LENGTH;
   const isDescriptionValid = description.length <= MAX_DESCRIPTION_LENGTH;

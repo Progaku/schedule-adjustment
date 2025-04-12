@@ -2,9 +2,12 @@
 
 import { MultiDatePicker } from '@yamada-ui/calendar';
 import { Button, Container, FormControl, HStack, Input, Text, Textarea, VStack } from '@yamada-ui/react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const AttendanceNewForm = () => {
+  const router = useRouter();
+
   const [isDateValid, setIsDateValid] = useState<boolean>(false);
   const [isTitleValid, setIsTitleValid] = useState<boolean>(false);
 
@@ -48,7 +51,7 @@ const AttendanceNewForm = () => {
         </VStack>
 
         <HStack justifyContent="space-around">
-          <Button variant="outline" colorScheme="gray">
+          <Button variant="outline" colorScheme="gray" onClick={() => router.push('/')}>
             キャンセル
           </Button>
           <Button background="black" textColor="white" disabled={!isDateValid || !isTitleValid}>

@@ -10,12 +10,12 @@ export default function Home() {
   const { open, onOpen, onClose } = useDisclosure();
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen'>
-      <div className='text-center'>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="text-center">
         <Title />
         <StartButton />
       </div>
-      <Button onClick={onOpen} background='black' textColor='white'>
+      <Button onClick={onOpen} background="black" textColor="white">
         スケジュールを編集
       </Button>
 

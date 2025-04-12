@@ -1,6 +1,7 @@
 'use client';
+
 import { MultiDatePicker } from '@yamada-ui/calendar';
-import { Button, Container, FormControl, HStack, Input, Textarea, VStack, Text } from '@yamada-ui/react';
+import { Button, Container, FormControl, HStack, Input, Text, Textarea, VStack } from '@yamada-ui/react';
 import { useState } from 'react';
 
 const AttendanceNewForm = () => {

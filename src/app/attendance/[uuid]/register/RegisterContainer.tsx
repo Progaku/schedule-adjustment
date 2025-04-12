@@ -1,8 +1,8 @@
 'use client';
-import { use } from 'react';
-import { redirect } from 'next/navigation';
-import RegisterPresentational from './RegisterPresentational';
 import { useAttendance } from '@/lib/hooks/useAttendance';
+import { redirect } from 'next/navigation';
+import { use } from 'react';
+import RegisterPresentational from './RegisterPresentational';
 
 type RegisterContainerProps = {
   params: Promise<{ uuid: string }>;

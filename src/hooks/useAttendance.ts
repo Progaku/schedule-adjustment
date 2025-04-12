@@ -1,5 +1,5 @@
+import { API_URL } from '@/const';
 import { Attendance } from '@/interfaces/Attendance';
-import { API_URL } from '../const';
 import useSWR from 'swr';
 
 const fetcher = async (url: string): Promise<Attendance> => {
@@ -7,8 +7,7 @@ const fetcher = async (url: string): Promise<Attendance> => {
   if (!res.ok) {
     throw new Error(`HTTP status: ${res.status}`);
   }
-  const data = res.json();
-  return data;
+  return res.json();
 };
 
 export const useAttendance = (uuid: string) => {

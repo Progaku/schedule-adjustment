@@ -1,5 +1,5 @@
 'use client';
-import { useAttendance } from '@/lib/hooks/useAttendance';
+import { useAttendance } from '@/hooks/useAttendance';
 import { redirect } from 'next/navigation';
 import { use } from 'react';
 import RegisterPresentational from './RegisterPresentational';

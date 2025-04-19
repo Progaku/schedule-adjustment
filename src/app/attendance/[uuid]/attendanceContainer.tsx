@@ -1,8 +1,9 @@
 'use client';
 import AttendanceEditDialog from '@/app/attendance/[uuid]/AttendanceEditDialog';
+import ConfirmDialog from '@/components/shared/confirmDialog';
 import { useAttendance } from '@/hooks/useAttendance';
 import { attendanceAtom } from '@/store';
-import { Button, Container, Heading, Text, useDisclosure } from '@yamada-ui/react';
+import { Button, Container, Heading, Text, useBoolean, useDisclosure } from '@yamada-ui/react';
 import { useAtom } from 'jotai/index';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -14,8 +15,22 @@ export default function AttendanceContainer({
 }) {
   const router = useRouter();
   const [_, setAttendance] = useAtom(attendanceAtom);
+  const [flg, { on, off }] = useBoolean(false);
   const { attendance, error, isLoading } = useAttendance(uuid);
-  const { open, onOpen, onClose } = useDisclosure();
+  const {
+    open: openForEditAttendance,
+    onOpen: onOpenForEditAttendance,
+    onClose: onCloseForEditAttendance,
+  } = useDisclosure();
+
+  const {
+    open: openForConfirmDialog,
+    onOpen: onOpenForConfirmDialog,
+    onClose: onCloseForConfirmDialog,
+  } = useDisclosure();
+  useEffect(() => {
+    console.log(flg);
+  }, [flg]);
 
   useEffect(() => {
     if (isLoading) {
@@ -34,24 +49,40 @@ export default function AttendanceContainer({
   return (
     <>
       <div>
-        <div className="flex flex-row justify-between items-center">
-          <Container>
-            <Heading>{attendance?.title ?? ''}</Heading>
-            <Text>{attendance?.description ?? ''}</Text>
-          </Container>
-          <Button onClick={onOpen} background="black" textColor="white">
-            スケジュールを編集
-          </Button>
+        <div>
+          <div className="flex flex-row justify-between items-center">
+            <Container>
+              <Heading>{attendance?.title ?? ''}</Heading>
+              <Text>{attendance?.description ?? ''}</Text>
+            </Container>
+            <Button onClick={onOpenForEditAttendance} background="black" textColor="white">
+              スケジュールを編集
+            </Button>
+          </div>
+          <Button onClick={() => router.push(`/attendance/${uuid}/register`)}>登録</Button>
         </div>
-        <Button onClick={() => router.push(`/attendance/${uuid}/register`)}>登録</Button>
+        <AttendanceEditDialog
+          isOpen={openForEditAttendance}
+          onClose={onCloseForEditAttendance}
+          onSave={onCloseForEditAttendance}
+          title={attendance?.title ?? ''}
+          description={attendance?.description ?? ''}
+        />
       </div>
-      <AttendanceEditDialog
-        isOpen={open}
-        onClose={onClose}
-        onSave={onClose}
-        title={attendance?.title ?? ''}
-        description={attendance?.description ?? ''}
-      />
+      <div>
+        <Button onClick={onOpenForConfirmDialog}>削除</Button>
+        <ConfirmDialog
+          isOpen={openForConfirmDialog}
+          onClose={() => {
+            off();
+            onCloseForConfirmDialog();
+          }}
+          onSave={() => {
+            on();
+            onCloseForConfirmDialog();
+          }}
+        />
+      </div>
     </>
   );
 }

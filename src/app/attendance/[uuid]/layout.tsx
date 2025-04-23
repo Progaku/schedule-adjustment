@@ -1,6 +1,6 @@
 import LayoutClient from '@/app/attendance/[uuid]/_layoutClient';
+import Header from '@/components/top/header';
 import { Provider } from 'jotai';
-import Link from 'next/link';
 
 export default function Layout({
   children,
@@ -11,7 +11,7 @@ export default function Layout({
     <Provider>
       <LayoutClient>
         <div className="p-[16px]">
-          <Link href="/">Layout Header</Link>
+          <Header />
           {children}
         </div>
       </LayoutClient>

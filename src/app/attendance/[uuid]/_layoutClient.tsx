@@ -1,5 +1,7 @@
 'use client';
 
+import { attendanceAtom, initialAttendance } from '@/store';
+import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
 export default function LayoutClient({
@@ -7,9 +9,11 @@ export default function LayoutClient({
 }: {
   children: React.ReactNode;
 }) {
+  const [_attendance, setAttendance] = useAtom(attendanceAtom);
+
   useEffect(() => {
     return () => {
-      console.log('unmount');
+      setAttendance({ ...initialAttendance });
     };
   }, []);
 

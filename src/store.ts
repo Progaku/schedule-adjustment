@@ -1,11 +1,15 @@
 import { Attendance } from '@/interfaces/Attendance';
 import { atom } from 'jotai';
 
-export const attendanceAtom = atom<Attendance>({
+export const initialAttendance = {
   title: '',
   description: '',
   candidateDate: [],
   schedules: [],
+};
+
+export const attendanceAtom = atom<Attendance>({
+  ...initialAttendance,
 });
 
 export const participantAtom = atom<string | null>(null);

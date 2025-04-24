@@ -1,15 +1,6 @@
-import { convertStatusToSymbol } from "@/app/utils/utils";
-import { Attendance } from "@/interfaces/Attendance";
-import {
-  Link,
-  NativeTable,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "@yamada-ui/react";
+import { Attendance } from '@/interfaces/Attendance';
+import { convertStatusToSymbol } from '@/utils/utils';
+import { Link, NativeTable, TableContainer, Tbody, Td, Th, Thead, Tr } from '@yamada-ui/react';
 
 type AttendanceTableProps = {
   uuid: string;
@@ -22,7 +13,7 @@ const AttendanceTable = ({ uuid, attendance }: AttendanceTableProps) => {
       <NativeTable>
         <Thead>
           <Tr>
-            <Th></Th>
+            <Th> </Th>
             {attendance.candidateDate.map((date) => (
               <Th key={date} textAlign="center">
                 {date}
@@ -34,19 +25,13 @@ const AttendanceTable = ({ uuid, attendance }: AttendanceTableProps) => {
           {attendance.schedules.map((item) => (
             <Tr key={item.id}>
               <Td>
-                <Link href={`/attendance/${uuid}/${item.id}/edit`}>
-                  {item.name}
-                </Link>
+                <Link href={`/attendance/${uuid}/${item.id}/edit`}>{item.name}</Link>
               </Td>
               {attendance.candidateDate.map((date) => {
-                const resultParam = item.params.find(
-                  (param) => param.date === date
-                );
+                const resultParam = item.params.find((param) => param.date === date);
                 return (
                   <Td key={date} textAlign="center">
-                    {resultParam
-                      ? convertStatusToSymbol(resultParam.status)
-                      : "-"}
+                    {resultParam ? convertStatusToSymbol(resultParam.status) : '-'}
                   </Td>
                 );
               })}

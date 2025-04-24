@@ -1,20 +1,13 @@
-"use client";
-import AttendanceEditDialog from "@/app/attendance/[uuid]/AttendanceEditDialog";
-import ConfirmDialog from "@/components/shared/confirmDialog";
-import { useAttendance } from "@/hooks/useAttendance";
-import { attendanceAtom } from "@/store";
-import {
-  Button,
-  Container,
-  Heading,
-  Text,
-  useBoolean,
-  useDisclosure,
-} from "@yamada-ui/react";
-import { useAtom } from "jotai/index";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import AttendanceTable from "./AttendanceTable";
+'use client';
+import AttendanceEditDialog from '@/app/attendance/[uuid]/AttendanceEditDialog';
+import ConfirmDialog from '@/components/shared/confirmDialog';
+import { useAttendance } from '@/hooks/useAttendance';
+import { attendanceAtom } from '@/store';
+import { Button, Container, Heading, Text, useBoolean, useDisclosure } from '@yamada-ui/react';
+import { useAtom } from 'jotai/index';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import AttendanceTable from './AttendanceTable';
 
 export default function AttendanceContainer({ uuid }: { uuid: string }) {
   const router = useRouter();
@@ -42,10 +35,8 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
     }
 
     if (error || !attendance) {
-      console.error(
-        `データ取得に失敗： ${error?.message}` || "No data returned."
-      );
-      router.push("/");
+      console.error(`データ取得に失敗： ${error?.message}` || 'No data returned.');
+      router.push('/');
       return;
     }
 
@@ -58,14 +49,10 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
         <div>
           <div className="flex flex-row justify-between items-center">
             <Container>
-              <Heading>{attendance?.title ?? ""}</Heading>
-              <Text>{attendance?.description ?? ""}</Text>
+              <Heading>{attendance?.title ?? ''}</Heading>
+              <Text>{attendance?.description ?? ''}</Text>
             </Container>
-            <Button
-              onClick={onOpenForEditAttendance}
-              background="black"
-              textColor="white"
-            >
+            <Button onClick={onOpenForEditAttendance} background="black" textColor="white">
               スケジュールを編集
             </Button>
           </div>
@@ -74,16 +61,14 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
               <AttendanceTable uuid={uuid} attendance={attendance} />
             </Container>
           )}
-          <Button onClick={() => router.push(`/attendance/${uuid}/register`)}>
-            登録
-          </Button>
+          <Button onClick={() => router.push(`/attendance/${uuid}/register`)}>登録</Button>
         </div>
         <AttendanceEditDialog
           isOpen={openForEditAttendance}
           onClose={onCloseForEditAttendance}
           onSave={onCloseForEditAttendance}
-          title={attendance?.title ?? ""}
-          description={attendance?.description ?? ""}
+          title={attendance?.title ?? ''}
+          description={attendance?.description ?? ''}
         />
       </div>
       <div>

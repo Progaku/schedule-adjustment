@@ -1,6 +1,6 @@
 import { API_URL } from '@/const';
 import { Attendance, RegisterAttendanceForm } from '@/interfaces/Attendance';
-import { RegisterAttendanceRequest } from '@/interfaces/RegisterAttendanceForm';
+import { RegisterAttendanceRequest, UpdateAttendanceRequest } from '@/interfaces/api';
 import useSWR from 'swr';
 
 const fetcher = async (url: string): Promise<Attendance> => {
@@ -11,9 +11,9 @@ const fetcher = async (url: string): Promise<Attendance> => {
   return res.json();
 };
 
-const postRequest = async <T, V>(url: string, data: T): Promise<V> => {
+const PutRequestBase = async <T, V>(method: string, url: string, data: T): Promise<V> => {
   const res = await fetch(url, {
-    method: 'POST',
+    method: method,
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json',
@@ -23,6 +23,14 @@ const postRequest = async <T, V>(url: string, data: T): Promise<V> => {
     throw new Error(`HTTP status: ${res.status}`);
   }
   return res.json();
+};
+
+const postRequest = async <T, V>(url: string, data: T): Promise<V> => {
+  return PutRequestBase<T, V>('POST', url, data);
+};
+
+const patchRequest = async <T, V>(url: string, data: T): Promise<V> => {
+  return PutRequestBase<T, V>('PATCH', url, data);
 };
 
 export const useGetAttendance = (uuid: string) => {
@@ -49,4 +57,9 @@ export const useRegisterAttendance = async (body: RegisterAttendanceForm) => {
     ),
   };
   return postRequest<RegisterAttendanceRequest, { uuid: string }>(url, requestBody);
+};
+
+export const useUpdateAttendance = async (uuid: string, body: UpdateAttendanceRequest): Promise<void> => {
+  const url = `${API_URL.BASE_URL}/${uuid}`;
+  return patchRequest<UpdateAttendanceRequest, void>(url, body);
 };

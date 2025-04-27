@@ -1,5 +1,6 @@
 'use client';
 
+import { UpdateAttendanceRequest } from '@/interfaces/api';
 import { Button, ErrorMessage, FormControl, Input, Label, Modal, Stack, Textarea } from '@yamada-ui/react';
 import { useEffect, useState } from 'react';
 
@@ -9,7 +10,7 @@ const MAX_TITLE_LENGTH = 128;
 interface AttendanceEditDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: () => void;
+  onSave: (data: UpdateAttendanceRequest) => void;
   title: string;
   description: string;
 }
@@ -35,8 +36,7 @@ export default function AttendanceEditDialog({
 
   const handleSave = () => {
     if (!isDescriptionValid || !isTitleValid || isTitleEmpty) return;
-    onSave();
-    onClose();
+    onSave({ title, description });
   };
 
   return (

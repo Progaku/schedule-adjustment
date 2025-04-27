@@ -1,5 +1,5 @@
 'use client';
-import { useRegisterAttendance } from '@/hooks/useGetAttendance';
+import { useRegisterAttendance } from '@/hooks/api';
 import { RegisterAttendanceForm } from '@/interfaces/Attendance';
 import { Button, Container, HStack, VStack } from '@yamada-ui/react';
 import { useRouter } from 'next/navigation';

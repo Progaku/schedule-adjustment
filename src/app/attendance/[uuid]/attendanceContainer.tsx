@@ -1,7 +1,8 @@
 'use client';
 import AttendanceEditDialog from '@/app/attendance/[uuid]/AttendanceEditDialog';
 import ConfirmDialog from '@/components/shared/confirmDialog';
-import { useGetAttendance } from '@/hooks/useGetAttendance';
+import { useGetAttendance, useUpdateAttendance } from '@/hooks/api';
+import { UpdateAttendanceRequest } from '@/interfaces/api';
 import { attendanceAtom } from '@/store';
 import { Button, Container, Heading, Text, useBoolean, useDisclosure } from '@yamada-ui/react';
 import { useAtom } from 'jotai/index';
@@ -44,6 +45,11 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
     setAttendance(attendance);
   }, [uuid, isLoading]);
 
+  const onUpdate = async (data: UpdateAttendanceRequest) => {
+    onCloseForEditAttendance();
+    await useUpdateAttendance(uuid, data);
+  };
+
   return (
     <>
       <div>
@@ -66,7 +72,7 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
         <AttendanceEditDialog
           isOpen={openForEditAttendance}
           onClose={onCloseForEditAttendance}
-          onSave={onCloseForEditAttendance}
+          onSave={onUpdate}
           title={attendance?.title ?? ''}
           description={attendance?.description ?? ''}
         />

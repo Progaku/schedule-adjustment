@@ -7,12 +7,9 @@ import { Button, Container, Heading, Text, useBoolean, useDisclosure } from '@ya
 import { useAtom } from 'jotai/index';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import AttendanceTable from './AttendanceTable';
 
-export default function AttendanceContainer({
-  uuid,
-}: {
-  uuid: string;
-}) {
+export default function AttendanceContainer({ uuid }: { uuid: string }) {
   const router = useRouter();
   const [_, setAttendance] = useAtom(attendanceAtom);
   const [flg, { on, off }] = useBoolean(false);
@@ -59,6 +56,11 @@ export default function AttendanceContainer({
               スケジュールを編集
             </Button>
           </div>
+          {attendance && (
+            <Container>
+              <AttendanceTable uuid={uuid} attendance={attendance} />
+            </Container>
+          )}
           <Button onClick={() => router.push(`/attendance/${uuid}/register`)}>登録</Button>
         </div>
         <AttendanceEditDialog

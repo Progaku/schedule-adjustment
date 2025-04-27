@@ -24,7 +24,7 @@ router.post(
       ...res,
       schedules: [],
     };
-    return response200noContent(c);
+    return response200(c, { uuid });
   },
 );
 

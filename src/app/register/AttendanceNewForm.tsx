@@ -1,36 +1,37 @@
 'use client';
+import { useRegisterAttendance } from '@/hooks/useGetAttendance';
+import { RegisterAttendanceForm } from '@/interfaces/Attendance';
 import { Button, Container, HStack, VStack } from '@yamada-ui/react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import TitleField from './TitleField';
-import ContentField from './ContentField';
 import CandidateDatesField from './CandidateDatesField';
-import { RegisterFormData } from '@/interfaces/RegisterFormData';
+import ContentField from './ContentField';
+import TitleField from './TitleField';
 
 const AttendanceNewForm = () => {
   const router = useRouter();
 
   const {
     control,
-    handleSubmit,
+    getValues,
     formState: { isValid },
-  } = useForm<RegisterFormData>({
+  } = useForm<RegisterAttendanceForm>({
     mode: 'onChange',
     defaultValues: {
       title: '',
-      content: '',
-      candidate_dates: [],
+      description: '',
+      candidateDate: [],
     },
   });
 
-  //TODO 新規登録用の server actionの作成
-  const onSubmit = (data: RegisterFormData) => {
-    console.log(data);
+  const onClickRegisterButton = async () => {
+    const { uuid } = await useRegisterAttendance(getValues());
+    router.push(`/attendance/${uuid}`);
   };
 
   return (
     <Container maxW="container.md" mx="auto" p={32} h="100svh" display="flex" flexDirection="column">
-      <VStack as="form" w="full" flex="1" g={12} justifyContent="space-between" onSubmit={handleSubmit(onSubmit)}>
+      <VStack as="form" w="full" flex="1" g={12} justifyContent="space-between">
         <VStack g={12}>
           <TitleField control={control} />
           <ContentField control={control} />
@@ -41,7 +42,7 @@ const AttendanceNewForm = () => {
           <Button variant="outline" colorScheme="gray" onClick={() => router.push('/')}>
             キャンセル
           </Button>
-          <Button background="black" textColor="white" disabled={!isValid}>
+          <Button onClick={onClickRegisterButton} background="black" textColor="white" disabled={!isValid}>
             決定
           </Button>
         </HStack>

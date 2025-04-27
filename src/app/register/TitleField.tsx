@@ -1,9 +1,9 @@
-import { RegisterFormData } from '@/interfaces/RegisterFormData';
+import { RegisterAttendanceForm } from '@/interfaces/Attendance';
 import { FormControl, Input } from '@yamada-ui/react';
 import { Control, Controller } from 'react-hook-form';
 
 type TitleFieldProps = {
-  control: Control<RegisterFormData>;
+  control: Control<RegisterAttendanceForm>;
 };
 
 const TitleField = ({ control }: TitleFieldProps) => {

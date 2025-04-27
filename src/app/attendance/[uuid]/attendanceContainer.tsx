@@ -1,7 +1,7 @@
 'use client';
 import AttendanceEditDialog from '@/app/attendance/[uuid]/AttendanceEditDialog';
 import ConfirmDialog from '@/components/shared/confirmDialog';
-import { useAttendance } from '@/hooks/useAttendance';
+import { useGetAttendance } from '@/hooks/useGetAttendance';
 import { attendanceAtom } from '@/store';
 import { Button, Container, Heading, Text, useBoolean, useDisclosure } from '@yamada-ui/react';
 import { useAtom } from 'jotai/index';
@@ -13,7 +13,7 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
   const router = useRouter();
   const [_, setAttendance] = useAtom(attendanceAtom);
   const [flg, { on, off }] = useBoolean(false);
-  const { attendance, error, isLoading } = useAttendance(uuid);
+  const { attendance, error, isLoading } = useGetAttendance(uuid);
   const {
     open: openForEditAttendance,
     onOpen: onOpenForEditAttendance,
@@ -25,6 +25,7 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
     onOpen: onOpenForConfirmDialog,
     onClose: onCloseForConfirmDialog,
   } = useDisclosure();
+
   useEffect(() => {
     console.log(flg);
   }, [flg]);
@@ -61,7 +62,6 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
               <AttendanceTable uuid={uuid} attendance={attendance} />
             </Container>
           )}
-          <Button onClick={() => router.push(`/attendance/${uuid}/register`)}>登録</Button>
         </div>
         <AttendanceEditDialog
           isOpen={openForEditAttendance}
@@ -71,20 +71,25 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
           description={attendance?.description ?? ''}
         />
       </div>
-      <div>
-        <Button onClick={onOpenForConfirmDialog}>削除</Button>
-        <ConfirmDialog
-          isOpen={openForConfirmDialog}
-          onClose={() => {
-            off();
-            onCloseForConfirmDialog();
-          }}
-          onSave={() => {
-            on();
-            onCloseForConfirmDialog();
-          }}
-        />
+      <div className="flex justify-between">
+        <Button onClick={onOpenForConfirmDialog} variant="outline" colorScheme="gray">
+          削除
+        </Button>
+        <Button onClick={() => router.push(`/attendance/${uuid}/register`)} background="black" textColor="white">
+          登録
+        </Button>
       </div>
+      <ConfirmDialog
+        isOpen={openForConfirmDialog}
+        onClose={() => {
+          off();
+          onCloseForConfirmDialog();
+        }}
+        onSave={() => {
+          on();
+          onCloseForConfirmDialog();
+        }}
+      />
     </>
   );
 }

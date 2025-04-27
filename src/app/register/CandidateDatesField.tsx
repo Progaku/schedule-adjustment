@@ -1,10 +1,10 @@
-import { RegisterFormData } from '@/interfaces/RegisterFormData';
+import { RegisterAttendanceForm } from '@/interfaces/Attendance';
 import { MultiDatePicker } from '@yamada-ui/calendar';
 import { FormControl, Text } from '@yamada-ui/react';
 import { Control, Controller } from 'react-hook-form';
 
 type CandidateDatesFieldProps = {
-  control: Control<RegisterFormData>;
+  control: Control<RegisterAttendanceForm>;
 };
 
 const CandidateDatesField = ({ control }: CandidateDatesFieldProps) => {
@@ -14,7 +14,7 @@ const CandidateDatesField = ({ control }: CandidateDatesFieldProps) => {
         今日以降で2日以上
       </Text>
       <Controller
-        name="candidate_dates"
+        name="candidateDate"
         control={control}
         rules={{
           validate: (value) => value.length >= 2,

@@ -11,3 +11,9 @@ export interface Attendance {
     }[];
   }[];
 }
+
+export type RegisterAttendanceForm = {
+  title: string;
+  description: string;
+  candidateDate: Date[];
+};

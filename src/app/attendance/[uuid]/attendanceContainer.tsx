@@ -14,7 +14,7 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
   const router = useRouter();
   const [_, setAttendance] = useAtom(attendanceAtom);
   const [flg, { on, off }] = useBoolean(false);
-  const { attendance, error, isLoading } = useGetAttendance(uuid);
+  const { attendance, error, isLoading, mutate } = useGetAttendance(uuid);
   const {
     open: openForEditAttendance,
     onOpen: onOpenForEditAttendance,
@@ -48,6 +48,7 @@ export default function AttendanceContainer({ uuid }: { uuid: string }) {
   const onUpdate = async (data: UpdateAttendanceRequest) => {
     onCloseForEditAttendance();
     await useUpdateAttendance(uuid, data);
+    await mutate();
   };
 
   return (

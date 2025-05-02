@@ -8,3 +8,11 @@ export interface UpdateAttendanceRequest {
   title: string;
   description: string;
 }
+
+export interface RegisterParticipantRequest {
+  name: string;
+  params: {
+    date: string;
+    status: 'ok' | 'pn' | 'ng';
+  }[];
+}

@@ -17,3 +17,12 @@ export type RegisterAttendanceForm = {
   description: string;
   candidateDate: Date[];
 };
+
+export interface RegisterParticipantParamsInterface {
+  [key: string]: 'ok' | 'pn' | 'ng';
+}
+
+export interface RegisterParticipantForm {
+  name: string;
+  params: RegisterParticipantParamsInterface;
+}

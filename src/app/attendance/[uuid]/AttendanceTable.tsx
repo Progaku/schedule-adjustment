@@ -1,6 +1,9 @@
 import { Attendance } from '@/interfaces/Attendance';
+import { participantAtom } from '@/store';
 import { convertStatusToSymbol } from '@/utils/utils';
-import { Link, NativeTable, TableContainer, Tbody, Td, Th, Thead, Tr } from '@yamada-ui/react';
+import { Button, NativeTable, TableContainer, Tbody, Td, Th, Thead, Tr } from '@yamada-ui/react';
+import { useAtom } from 'jotai';
+import { useRouter } from 'next/navigation';
 
 type AttendanceTableProps = {
   uuid: string;
@@ -8,6 +11,12 @@ type AttendanceTableProps = {
 };
 
 const AttendanceTable = ({ uuid, attendance }: AttendanceTableProps) => {
+  const router = useRouter();
+  const [_participant, setParticipant] = useAtom(participantAtom);
+  const onclickParticipantLink = (participant: string) => {
+    setParticipant(participant);
+    router.push(`/attendance/${uuid}/${participant}/edit`);
+  };
   return (
     <TableContainer>
       <NativeTable>
@@ -25,7 +34,9 @@ const AttendanceTable = ({ uuid, attendance }: AttendanceTableProps) => {
           {attendance.schedules.map((item) => (
             <Tr key={item.id}>
               <Td>
-                <Link href={`/attendance/${uuid}/${item.id}/edit`}>{item.name}</Link>
+                <Button variant="ghost" colorScheme="link" onClick={() => onclickParticipantLink(item.id)}>
+                  {item.name}
+                </Button>
               </Td>
               {attendance.candidateDate.map((date) => {
                 const resultParam = item.params.find((param) => param.date === date);

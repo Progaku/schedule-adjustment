@@ -14,7 +14,7 @@ export const attendanceAtom = atom<Attendance>({
 
 export const participantAtom = atom<string | null>(null);
 
-export const getParticipantAtom = atom((get) => {
+export const getParticipantAtom = atom<Attendance['schedules'][number] | null>((get) => {
   const participantUuid = get(participantAtom);
   if (!participantUuid) {
     return null;

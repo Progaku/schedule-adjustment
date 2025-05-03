@@ -1,6 +1,11 @@
 import { API_URL } from '@/const';
 import { Attendance, RegisterAttendanceForm } from '@/interfaces/Attendance';
-import { RegisterAttendanceRequest, RegisterParticipantRequest, UpdateAttendanceRequest } from '@/interfaces/api';
+import {
+  RegisterAttendanceRequest,
+  RegisterParticipantRequest,
+  UpdateAttendanceRequest,
+  UpdateParticipantRequest,
+} from '@/interfaces/api';
 import useSWR from 'swr';
 
 const fetcher = async (url: string): Promise<Attendance> => {
@@ -70,6 +75,24 @@ export const useRegisterParticipant = async (uuid: string, body: RegisterPartici
   const url = `${API_URL.BASE_URL}/${uuid}`;
   const res = await fetch(url, {
     method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (!res.ok) {
+    throw new Error(`HTTP status: ${res.status}`);
+  }
+};
+
+export const useUpdateParticipant = async (
+  uuid: string,
+  participant: string,
+  body: UpdateParticipantRequest,
+): Promise<void> => {
+  const url = `${API_URL.BASE_URL}/${uuid}/${participant}`;
+  const res = await fetch(url, {
+    method: 'PATCH',
     body: JSON.stringify(body),
     headers: {
       'Content-Type': 'application/json',

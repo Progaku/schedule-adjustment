@@ -16,3 +16,11 @@ export interface RegisterParticipantRequest {
     status: 'ok' | 'pn' | 'ng';
   }[];
 }
+
+export interface UpdateParticipantRequest {
+  name: string;
+  params: {
+    date: string;
+    status: 'ok' | 'pn' | 'ng';
+  }[];
+}

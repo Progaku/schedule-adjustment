@@ -5,12 +5,11 @@ import { RegisterParticipantForm } from '@/interfaces/Attendance';
 import { attendanceAtom } from '@/store';
 import { Button, FormControl, HStack, Input, SegmentedControl, SegmentedControlButton } from '@yamada-ui/react';
 import { useAtom } from 'jotai/index';
-import { redirect, useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 
 const RegisterContainer = ({ uuid }: { uuid: string }) => {
   const [attendance, _setAttendance] = useAtom(attendanceAtom);
-  const router = useRouter();
   const {
     getValues,
     control,
@@ -23,7 +22,7 @@ const RegisterContainer = ({ uuid }: { uuid: string }) => {
     },
   });
   const routingDetail = () => {
-    router.push(`attendance/${uuid}`);
+    redirect(`/attendance/${uuid}`);
   };
   const onClickRegisterButton = async () => {
     const inputValues = getValues();

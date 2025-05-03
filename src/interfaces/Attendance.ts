@@ -7,7 +7,7 @@ export interface Attendance {
     name: string;
     params: {
       date: string;
-      status: string;
+      status: 'ok' | 'pn' | 'ng';
     }[];
   }[];
 }
